@@ -1,0 +1,16 @@
+name: aigc-examples
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pytorch
+  - pytorch-cuda
+  - torchvision
+  - numpy
+  - tqdm
+  - matplotlib
+  - pip:
+    - einops
+    - torchdiffeq
