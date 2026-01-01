@@ -77,17 +77,17 @@ which is sometimes referred to as the (Gaussian) CondOT probability path. Then w
 
 
 #### Algorithm 1: Flow Matching Training Procedure  
-*(here for Gaussian CondOT path \( p_t(x|z) = \mathcal{N}(tz, (1 - t)^2) \))*
+*(here for Gaussian CondOT path $` p_t(x|z) = \mathcal{N}(tz, (1 - t)^2) `$)*
 
 ---
 
-**Require:** A dataset of samples \( z \sim p_{\text{data}} \), neural network \( u_t^\theta \)
+**Require:** A dataset of samples $` z \sim p_{\text{data}} `$, neural network $` u_t^\theta `$
 
 1. **for** each mini-batch of data **do**
-2. &nbsp;&nbsp;&nbsp;&nbsp;Sample a data example \( z \) from the dataset.
-3. &nbsp;&nbsp;&nbsp;&nbsp;Sample a random time \( t \sim \text{Unif}_{[0,1]} \).
-4. &nbsp;&nbsp;&nbsp;&nbsp;Sample noise \( \epsilon \sim \mathcal{N}(0, I_d) \).
-5. &nbsp;&nbsp;&nbsp;&nbsp;Set \( x = tz + (1 - t)\epsilon \).
+2. &nbsp;&nbsp;&nbsp;&nbsp;Sample a data example $` z `$ from the dataset.
+3. &nbsp;&nbsp;&nbsp;&nbsp;Sample a random time $` t \sim \text{Unif}_{[0,1]} `$.
+4. &nbsp;&nbsp;&nbsp;&nbsp;Sample noise $` \epsilon \sim \mathcal{N}(0, I_d) `$.
+5. &nbsp;&nbsp;&nbsp;&nbsp;Set $` x = tz + (1 - t)\epsilon `$.
 6. &nbsp;&nbsp;&nbsp;&nbsp;Compute loss:
 
 ```math
@@ -103,16 +103,16 @@ After training, we can generate samples from the learned flow model by solving t
 
 ---
 
-**Require:** Neural network vector field \( u_t^\theta \), number of steps \( n \)
+**Require:** Neural network vector field $` u_t^\theta `$, number of steps $` n `$
 
-1. Set \( t = 0 \)
-2. Set step size \( h = \frac{1}{n} \)
-3. Draw a sample \( X_0 \sim p_{\text{init}} \)
-4. **for** \( i = 1, \dots, n \) **do**
-5. &nbsp;&nbsp;&nbsp;&nbsp;\( X_{t+h} = X_t + h u_t^\theta(X_t) \)
-6. &nbsp;&nbsp;&nbsp;&nbsp;Update \( t \leftarrow t + h \)
+1. Set $` t = 0 `$
+2. Set step size $` h = \frac{1}{n} `$
+3. Draw a sample $` X_0 \sim p_{\text{init}} `$
+4. **for** $` i = 1, \dots, n `$ **do**
+5. &nbsp;&nbsp;&nbsp;&nbsp;$` X_{t+h} = X_t + h u_t^\theta(X_t) `$
+6. &nbsp;&nbsp;&nbsp;&nbsp;Update $` t \leftarrow t + h `$
 7. **end for**
-8. **return** \( X_1 \)
+8. **return** $` X_1 `$
 
 ---
 
