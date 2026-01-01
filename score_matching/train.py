@@ -7,8 +7,6 @@ from torch.utils.data import DataLoader
 from dataset.dataset import get_data_loader
 
 from models.model_configs import instantiate_model
-from models.cond_refinenet_dilated import CondRefineNetDilated
-from models.refinenet_dilated_baseline import RefineNetDilated
 from utils.utils import get_device
 from utils.arg_parser import get_args_parser
 from dsm import anneal_dsm_score_estimation, dsm_score_estimation
@@ -56,7 +54,7 @@ def train(model: nn.Module,
             x = x.to(device)
 
             x = x * 2.0 - 1.0
-            sample = x / 256. * 255. + 2.0 * torch.rand_like(x) / 256.
+            sample = x / 256. * 255. + 1.0 * torch.rand_like(x) / 256.
             # sample = x
             t = torch.randint(0, len(sigma), (sample.shape[0],), device=device)
             loss = anneal_dsm_score_estimation(model, sample, t, sigma, 2.0)
@@ -81,7 +79,7 @@ def train(model: nn.Module,
 def main(args):
     device = get_device()
     data_loader = get_data_loader()
-    model = instantiate_model("ddpm")
+    model = instantiate_model("score_matching")
     # model = RefineNetDilated()
     model.to(device)
 
