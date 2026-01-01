@@ -11,7 +11,7 @@ Given a fixed step size $\epsilon>0$ and an initial value $\tilde{\mathbf{x}}\_0
 You can find an intuitve introduction of Langevine dynamics in <a name="reference-1"> [1] </a>.
 
 ## Denoising Score Matching
-
+In order to obtain samples from $p_{data}(x)$
 
 
 ## Reference
