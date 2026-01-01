@@ -50,20 +50,17 @@ After $`\mathbf{s}_{\theta}(\mathbf{x}, \sigma)`$ is trained, we can use anneale
 
 ### Algorithm: Annealed Langevin Dynamics
 
-**Require:**  
-\(\{\sigma_i\}_{i=1}^L, \ \epsilon, \ T\)
-
-1. Initialize \(\tilde{\mathbf{x}}_0\)
-2. **for** \( i \leftarrow 1 \ \text{to} \ L \) **do**
-3. \(\quad \alpha_i \leftarrow \epsilon \cdot \sigma_i^2 / \sigma_L^2 \)  ⟶ \(\alpha_i\) is the step size.
-4. \(\quad\) **for** \( t \leftarrow 1 \ \text{to} \ T \) **do**
-5. \(\qquad\) Draw \( \mathbf{z}_t \sim \mathcal{N}(0, \mathbf{I}) \)
-6. \(\qquad \tilde{\mathbf{x}}_t \leftarrow \tilde{\mathbf{x}}_{t-1} + \frac{\alpha_i}{2} s_{\theta}(\tilde{\mathbf{x}}_{t-1}, \sigma_i) + \sqrt{\alpha_i} \mathbf{z}_t \)
-7. \(\quad\) **end for**
-8. \(\quad \tilde{\mathbf{x}}_0 \leftarrow \tilde{\mathbf{x}}_T\)
+**Require:** $`\{\sigma_i\}_{i=1}^L, \ \epsilon, \ T`$
+1. Initialize $`\tilde{\mathbf{x}}_0`$
+2. **for** $` i \leftarrow 1 \ \text{to} \ L `$ **do**
+3. $`\quad \alpha_i \leftarrow \epsilon \cdot \sigma_i^2 / \sigma_L^2 `$  ⟶ $`\alpha_i`$ is the step size.
+4. $`\quad`$ **for** $` t \leftarrow 1 \ \text{to} \ T `$ **do**
+5. $`\qquad`$ Draw $` \mathbf{z}_t \sim \mathcal{N}(0, \mathbf{I}) `$
+6. $`\qquad \tilde{\mathbf{x}}_t \leftarrow \tilde{\mathbf{x}}_{t-1} + \frac{\alpha_i}{2} s_{\theta}(\tilde{\mathbf{x}}_{t-1}, \sigma_i) + \sqrt{\alpha_i} \mathbf{z}_t `$
+7. $`\quad`$ **end for**
+8. $`\quad \tilde{\mathbf{x}}_0 \leftarrow \tilde{\mathbf{x}}_T`$
 9. **end for**
-
-**return** \(\tilde{\mathbf{x}}_T\)
+10. **return** $`\tilde{\mathbf{x}}_T`$
 
 
 
