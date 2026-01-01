@@ -39,14 +39,14 @@ We choose the noise distribution to be $`q_{\sigma}(\tilde{\mathbf{x}} \mid \mat
 ```math
 \ell(\theta; \sigma) \triangleq \frac{1}{2} \mathbb{E}_{p_{\text{data}}(\mathbf{x})} \mathbb{E}_{\tilde{\mathbf{x}} \sim \mathcal{N}(\mathbf{x}, \sigma^2 \mathbf{I})} \left[ \left\| \mathbf{s}_{\theta}(\tilde{\mathbf{x}}, \sigma) + \frac{\tilde{\mathbf{x}} - \mathbf{x}}{\sigma^2} \right\|_2^2 \right]
 ```
-Let $`\{\sigma_i\}_{i=1}^L`$ be a positive geometric sequence that satisfies $`\frac{\sigma_1}{\sigma_2} = \cdots = \frac{\sigma_{L-1}}{\sigma_L} > 1`$. Considering all the $`\sigma \in \{\sigma_i\}_{i=1}^L`$, the unified objective is:
+Let $`\{\sigma_i\}_{i=1}^L`$ be a positive geometric sequence that satisfies $`\frac{\sigma_1}{\sigma_2} = \cdots = \frac{\sigma_{L-1}}{\sigma_L} > 1`$ [[2]][#reference-2]. Considering all the $`\sigma \in \{\sigma_i\}_{i=1}^L`$, the unified objective is:
 ```math
 \mathcal{L}(\theta; \{\sigma_i\}_{i=1}^L) \triangleq \frac{1}{L} \sum_{i=1}^L \lambda(\sigma_i) \, \ell(\theta; \sigma_i)
 ```
 where $`\lambda(\sigma_i)>0`$ is a coefficient function depending on $`\sigma_i`$. Assuming $`\mathbf{s}_{\theta}(\mathbf{x}, \sigma)`$ has enough capacity, $`\mathbf{s}_{\theta^{*}}(\mathbf{x}, \sigma)`$ minimizes the above objective if and only if $`\mathbf{s}_{\theta^{*}}(\mathbf{x}, \sigma_i)=\nabla_{\mathbf{x}} \log q_{\sigma_i}(\mathbf{x})`$ a.s. for all $`i \in \{1, 2, \dots, L\}`$.
 
 ## Inference
-After $`\mathbf{s}_{\theta}(\mathbf{x}, \sigma)`$ is trained, we can use annealed Langevin dynamics to produce samples as shown in the following algorithm:
+After $`\mathbf{s}_{\theta}(\mathbf{x}, \sigma)`$ is trained, we can use annealed Langevin dynamics to produce samples as shown in the following algorithm [[2]][#reference-2]:
 
 ### Algorithm: Annealed Langevin Dynamics
 
