@@ -27,10 +27,11 @@ def train(model: nn.Module,
         optimizer,
         total_iters=num_epochs,
         start_factor=1.0,
-        end_factor=1e-8 / lr,
+        end_factor=1e-4,
     )
     loss_scaler = NativeScalerWithGradNormCount()
 
+    max_loop = 400
     for i in range(num_epochs):
         total_loss = 0
         for bidx, (x,_) in enumerate(data_loader):
@@ -46,7 +47,7 @@ def train(model: nn.Module,
 
             with torch.cuda.amp.autocast():
                 loss = torch.pow(model(x_t, t, extra={}) - u_t, 2).mean()
-            
+
             loss_scaler(
                 loss,
                 optimizer,
@@ -56,11 +57,17 @@ def train(model: nn.Module,
 
             if bidx % 20 == 0:
                 print(f"Batch: {bidx} / {len(data_loader)}, Loss: {loss.item()}")
+            total_loss += loss.item()
 
-        print(f"Epoch: {i+1} Loss: {total_loss/len(data_loader)}")
+            if bidx >= max_loop:
+                break
+
+        print(f"Epoch: {i+1} Loss: {total_loss/(max_loop if max_loop < len(data_loader) else len(data_loader))}")
         lr_scheduler.step()
 
-    torch.save(model.state_dict(), f"model_epoch.pth")
+        if (i + 1) % 10 == 0:
+            torch.save(model.state_dict(), f"model_epoch_{i+1}.pth")
+
 
 def main(args):
     device = get_device()
