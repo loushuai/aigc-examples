@@ -17,6 +17,7 @@ conda activate aigc-examples
 | **Score Matching** | Score-based modeling with Langevin dynamics and multiple noise levels | [train.py](score_matching/train.py) | [inference.ipynb](score_matching/inference.ipynb) | [README](score_matching/README.md) |
 | **Flow Matching** | Neural ODE with conditional flow matching and Gaussian probability paths | [train.py](flow_matching/train.py) | [inference.ipynb](flow_matching/inference.ipynb) | [README](flow_matching/README.md) |
 | **Rectified Flow** | Optimal transport with straight-line trajectories for efficient sampling | [train.py](rectified_flow/train.py) | [inference.ipynb](rectified_flow/inference.ipynb) | [README](rectified_flow/README.md) |
+| **Normalizing Flows** | Invertible transformations with exact likelihood via change of variables (Glow) | [train.py](normalizing_flows/train.py) | [inference.ipynb](normalizing_flows/inference.ipynb) | [README](normalizing_flows/README.md) |
 
 ## Dependencies
 
